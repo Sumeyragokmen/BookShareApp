@@ -1,0 +1,25 @@
+<h1>Books</h1>
+
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>User</th>
+    <th>Show</th>
+    <th colspan="2"></th>
+  </tr>
+ 
+  <% @books.each do |book| %>
+    <tr>
+      <td><%= book.title %></td>
+      <td><%= book.author %></td>
+      <th><%= book.user.username %></th>
+
+      <td><%= link_to 'Show', book_path(book) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'New book', new_book_path %>
+<%= link_to 'Home', root_path %>
+<%= link_to 'Dashboard', dashboard_index_url %>

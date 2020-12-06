@@ -1,0 +1,59 @@
+<div class="container text-center mt-3">
+<div class="row justify-content-md-center">
+<div class="col-md-auto">
+<h3>
+  <strong>Title:</strong>
+  <%= @book.title %>
+</h3>
+ 
+<h3>
+  <strong>Author:</strong>
+  <%= @book.author %>
+</h3>
+
+<h3>
+  <strong>User:</strong>
+  <%= @book.user.username %>
+</h3>
+
+<h3>
+  <strong>Tradeable:</strong>
+  <%= @book.tradeable %>
+</h3>
+
+<% if @book.tradeable == true %>
+  <% if current_user == @book.user %>
+    <p> </p>
+  <% else %>
+<h6><a href="<%= new_book_trade_path(@book.id) %>" class="btn btn-secondary text-white">Trade </a></h6>
+  <% end %>
+<% end %>
+
+<h3>Comments</h3>
+<%= render @book.comments.approved %>
+<div class="comments"></div>
+<div id="flash.notice"></div>
+
+<% @unapproved.each do |comment| %>
+    <p>Title: <%= comment.title %></p>
+    <p>Content: <%= comment.content %></p>
+    <p>Status: Unapproved</p>
+  <% end %>
+
+<h3>Add a Comment</h3>
+  <%= form_with(model: [@book, @book.comments.build], local: false) do |form| %>
+    <p>
+      <%= form.label :title %><br>
+      <%= form.text_field :title %>
+    </p>
+    <p>
+      <%= form.label :content %><br>
+      <%= form.text_area :content %>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
+
+<%= link_to 'Back', dashboard_index_url, class:"btn btn-dark text-white" %>
+</div>

@@ -1,0 +1,46 @@
+ <%= form_with(model: @book, local: true) do |form| %>
+
+ <% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@book.errors.count, "error") %> prohibited
+        this book from being saved:
+      </h2>
+      <ul>
+        <% @book.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= form.label :author %><br>
+    <%= form.text_area :author %>
+  </p>
+
+  <p>
+    <%= form.label :pagecount %><br>
+    <%= form.number_field :pagecount %>
+  </p>
+
+  <p>
+    <%= form.label :status %><br>
+    <%= form.check_box :status %>
+  </p>
+
+    <p>
+    <%= form.label :tradeable %><br>
+    <%= form.check_box :tradeable %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+  
+<% end %>

@@ -1,0 +1,12 @@
+<div class="container text-center mt-3">
+<h2 class="m-3">The Books That Traded</h2>
+
+<h4 class="m-3"><%= "The book named #{@book.title} shared by #{@user.username}." %></h4>
+<%= form_with(model: [ @book, @book.trades.build ], local: true) do |form|  %>
+  <div class="form-group m-3">
+    <h4 class="mb-3">Please Select Book</h4>
+    <%= form.select(:suggestion_book_id, @books.map{|book| [book.title, book.id]},{},{:class=>"form-control form-control-lg col-3"})%>
+  </div>
+  <button type="submit" class="btn btn-primary m-3 ml-5">Submit</button>
+<% end %>
+</div>

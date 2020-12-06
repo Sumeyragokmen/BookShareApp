@@ -1,0 +1,26 @@
+<section class="m-5">
+<table class="table table-striped table-light" style="background-color: #c0c1b8;">
+  <thead class="thead-dark">
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Username</th>
+      <% if current_user %>
+        <th>Action</th>
+      <% end %>
+    </tr>
+  <thead>
+
+  <% @books.each do |book| %>
+  <tr>
+    <td><%= book.title %></td>
+    <td><%= book.author %></td>
+    <% user = User.find(book.user_id) %>
+    <td><%= user.username %></td>
+    <% if current_user %>
+      <td><%= link_to 'Show', book_path(book), class:"btn btn-info text-white"  %></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+</section>

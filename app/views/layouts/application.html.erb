@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>BookShare</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <a class="navbar-brand" href="/"><h3 style="color: white;">Home Book Home</h3></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+    <% if user_signed_in? %>
+      <li class="nav-item">
+        <a class="nav-link; btn btn-outline-info" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link; btn btn-outline-info" href="<%=dashboard_index_url %>">Dashboard</a>
+      </li>
+      <% end %>
+    </ul>
+    <% if user_signed_in? %>
+    <ul class="navbar-nav" style="margin-left:500px;">
+    <li class="nav-item pt-2"><p style="color: white;">Hello! <strong><%= current_user.username %></strong> welcome home.</p></li>
+      <li class="nav-item mx-2">
+         <%= link_to 'Profile', edit_user_registration_path, :class => 'btn btn-outline-success' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-outline-primary'  %>
+      </li>
+    </ul>
+<% else %>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item mx-2">
+        <%= link_to "Sign up", new_user_registration_path, :class => 'btn btn-outline-success' %>
+      </li>
+      <li class="nav-item mr-5">
+        <%= link_to "Login", new_user_session_path, :class => 'btn btn-outline-primary' %>
+      </li>
+      <li class="nav-item"></li>
+    </ul>
+    <% end %>
+    </nav>
+</div>
+    <% if notice %>
+     <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+     <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    <%= yield %>      
+    </div>
+  </body>
+</html>

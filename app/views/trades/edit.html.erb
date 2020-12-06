@@ -1,0 +1,10 @@
+<div class="container text-center mt-3">
+<div class="row justify-content-md-center">
+<div class="col-md-auto">
+
+<h4 class="mt-5 mb-4"><%= @trade_user.username %> suggested </h4><h4><%= @trade_book.title %> book.</h4>
+
+<button class="btn btn-outline-primary"><%= link_to 'Approve', :controller => :trades, :action => :approve %></button>
+<button class="btn btn-outline-danger"><%= link_to 'Deny', :controller => :trades, :action => :deny %></button>
+
+</div>
